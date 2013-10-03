@@ -80,8 +80,21 @@ public class Units extends Players{
 
     //устанавливаем крестик или нолик в зависимости от входящих значений
     public void startNewUnit(String player){
+        int k = getStarted(player);
+        int stack = 0;
+              for (int i=0;i<3;i++){
+                  for (int j=0;j<3;j++){
+                    stack++;
+                      if (stack==k){
+                          units[i][j]="0";
+                      }
+                  }
+             }
+    }
+            /*
 
-                switch ( getStarted(player)){
+
+        switch ( getStarted(player)){
                     case 1: units[0][0]="0";
                         break;
                     case 2: units[0][1]="0";
@@ -102,7 +115,7 @@ public class Units extends Players{
                         break;
                 }
     }
-
+                                            */
     public void startNewUnit1( String player){
                switch (getStarted(player)){
                    case 1: units[0][0]="X";
