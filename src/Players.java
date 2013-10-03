@@ -17,7 +17,7 @@ public class Players {
     public void setPlayer2(String player2){
         this.player2 = player2;
     }
-
+    //Даю имена игрочкам
     public void Names(){
         System.out.println("Player 1 name: ");
         Scanner name1 = new Scanner(System.in);
@@ -26,6 +26,7 @@ public class Players {
         Scanner name2 = new Scanner(System.in);
         setPlayer2(name2.next());
     }
+    //вывожу имена игрочков
     public void NameOut(){
         System.out.println("Player1 name: " + player1);
         System.out.println("Player2 name: " + player2);

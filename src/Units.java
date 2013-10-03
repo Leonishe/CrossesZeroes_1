@@ -1,10 +1,12 @@
 import java.util.Scanner;
 
+
 public class Units extends Players{
+    //Создаю массив 3*3 как поле для игры в крестики нолики
+
     String[][] units = new String[3][3];
-    public String unit;
 
-
+    //Записываю в ячейки массива дефолтные значения " " для наглядности
 
 
     public void defaultUnit(){
@@ -17,6 +19,7 @@ public class Units extends Players{
 
     }
 
+    //Вывожу значения массива
     public void newUnitOut(){
         for (int i=0;i<3;i++){
             for (int j=0;j<3;j++){
@@ -25,48 +28,58 @@ public class Units extends Players{
             System.out.println();
         }
     }
-
+    //Выбираем какое поле массива нужно заполнить
     public int getStarted(String player){
         int item = 0;
-              System.out.println(player + ", введите номер поля");
-              Scanner newItem = new Scanner(System.in);
-              item = Integer.parseInt(newItem.next());
-                    if((item<0)|(item>9))
-                            do {
-                             System.out.println(item + "-й бокс:");
-                             System.out.println("Введите номер ещё раз:");
+            System.out.println(player + ", enter the box number, please!");
+            Scanner newItem = new Scanner(System.in);
+            item = Integer.parseInt(newItem.next());//принимаем значение
+                          if((item<=0)|(item>9))     //проверяем подходит ли нам принятое значение
+                            do {                    //если нет, то повторяем ввод
+                             System.out.println(item + "th box:");
+                             System.out.println("Enter correct box number please!");
                              item = Integer.parseInt(newItem.next());
-                    }  while ((item<0)|(item>9));
+                            }  while ((item<=0)|(item>9));
 
 
 
 
-
-        return(item);
+         return(item);                              //возвращаем полученное значение
     }
 
+    // Проверяем полученную таблицу на "конец игры"
     public int checkWinner(){
-        int i =0;
-            if(
-               ((units[0][0] == units[0][1]) & (units[0][0] == units[0][2]) & (units[0][1] == units[0][2]))|
-               ((units[1][0] == units[1][1]) & (units[1][0] == units[1][2]) & (units[1][1] == units[1][2]))|
-               ((units[2][0] == units[2][1]) & (units[2][0] == units[2][2]) & (units[2][1] == units[2][2]))|
+        int winner =0;
 
-               ((units[0][0] == units[1][0]) & (units[0][0] == units[2][0]) & (units[1][0] == units[2][0]))|
-               ((units[0][1] == units[1][1]) & (units[0][1] == units[2][1]) & (units[1][1] == units[2][1]))|
-               ((units[0][2] == units[1][2]) & (units[0][2] == units[2][2]) & (units[1][2] == units[2][2]))|
+            if (units[1][1]!=" ")
+                if ((units[0][0]==units[1][1])&(units[1][1]==units[2][2])|          //проверка в диагоналях
+                    (units[0][2]==units[1][1])&(units[1][1]==units[2][0]))
+                    winner=1;
 
-               ((units[0][0] == units[1][1]) & (units[1][1] == units[2][2]) & (units[0][0] == units[2][2]))|
-               ((units[0][2] == units[1][1]) & (units[0][2] == units[2][0]) & (units[1][1] == units[2][0]))
 
-               ){
-                 i=1;
-            }
-        return(i);
+        if (winner == 0)
+        for (int i=0;i<3;i++){
+
+            if (units[i][0]!=" ")
+
+                if ((units[i][0]==units[i][1])&(units[i][0]==units[i][2])){           //проверка в строках
+                    winner=1;
+                    break;
+                }
+
+            if(units[0][i]!=" ")
+
+                if((units[0][i]==units[1][i])&(units[0][i]==units[2][i])){            //проверка в столбцах
+                    winner=1;
+                    break;
+                }
+        }
+
+        return(winner);    //Если условие выполнится, то возвращаем 1, если не выполнится то 0
     }
 
-    public void startNewUnit(int i, String player){
-
+    //устанавливаем крестик или нолик в зависимости от входящих значений
+    public void startNewUnit(String player){
 
                 switch ( getStarted(player)){
                     case 1: units[0][0]="0";
@@ -89,7 +102,8 @@ public class Units extends Players{
                         break;
                 }
     }
-    public void startNewUnit1(int i, String player){
+
+    public void startNewUnit1( String player){
                switch (getStarted(player)){
                    case 1: units[0][0]="X";
                         break;
